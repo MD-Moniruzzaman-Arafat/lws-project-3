@@ -2,6 +2,7 @@ import './App.css';
 import AnnouncementBar from './components/AnnouncementBar/AnnouncementBar';
 import Cart from './components/Cart/Cart';
 import HeaderNavigation from './components/HeaderNavigation/HeaderNavigation';
+import Newsletter from './components/Newsletter/Newsletter';
 import Products from './components/Products/Products';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Cart />
         </div>
       </main>
+      <Newsletter />
     </>
   );
 }
