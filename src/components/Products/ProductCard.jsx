@@ -1,19 +1,36 @@
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import { useContext, useState } from 'react';
-import { CartContext } from '../../context';
+import { CartContext, ProductsContext, SubTotalContext } from '../../context';
 
 export default function ProductCard({ product }) {
   const [toggleButton, setToggleButton] = useState(true);
   const { cartItems, setCartItems } = useContext(CartContext);
+  const { products, setProducts } = useContext(ProductsContext);
+  const { subTotal, setSubTotal } = useContext(SubTotalContext);
+
   function handleAdd() {
     setToggleButton(!toggleButton);
     setCartItems([...cartItems, product]);
+    const newProduct = products.map((pro) =>
+      pro.id === product.id ? { ...product, stock: product.stock - 1 } : pro
+    );
+    setProducts(newProduct);
+    setSubTotal(subTotal + product.price);
   }
+
   function handleRemove() {
     setToggleButton(!toggleButton);
     const filterItems = cartItems.filter((item) => item.id !== product.id);
     setCartItems(filterItems);
+
+    const resetProducts = products.map((p) =>
+      p.id === product.id
+        ? { ...p, stock: product.stock + product.quantity, quantity: 1 }
+        : p
+    );
+    setProducts(resetProducts);
+    setSubTotal(subTotal - product.price);
   }
 
   return (

@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { CartContext } from '../../context';
+import { CartContext, SubTotalContext } from '../../context';
 import CartItem from './CartItem';
 
 export default function Cart() {
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
+  const { subTotal } = useContext(SubTotalContext);
   return (
     <>
       <div className="lg:col-span-1">
@@ -21,7 +22,7 @@ export default function Cart() {
             <div className="space-y-2 mb-4">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">$565</span>
+                <span className="font-medium">${subTotal}</span>
               </div>
               <div className="flex justify-between text-red-500">
                 <span>Discount (-20%)</span>
