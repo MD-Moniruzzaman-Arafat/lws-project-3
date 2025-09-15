@@ -1,7 +1,9 @@
-import products from '../../../public/product.json';
+import { useContext } from 'react';
+import { ProductsContext } from '../../context';
 import ProductCard from './ProductCard';
 
 export default function Products() {
+  const { products } = useContext(ProductsContext);
   return (
     <>
       <div className="lg:col-span-2">
