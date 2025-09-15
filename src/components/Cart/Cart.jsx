@@ -26,7 +26,7 @@ export default function Cart() {
               </div>
               <div className="flex justify-between text-red-500">
                 <span>Discount (-20%)</span>
-                <span>-$113</span>
+                <span>-${subTotal * 0.2}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Delivery Fee</span>
@@ -34,7 +34,7 @@ export default function Cart() {
               </div>
               <div className="flex justify-between font-bold text-lg pt-2 border-t border-gray-200">
                 <span>Total</span>
-                <span>$467</span>
+                <span>${subTotal - (subTotal * 0.2 + 15)}</span>
               </div>
             </div>
 
