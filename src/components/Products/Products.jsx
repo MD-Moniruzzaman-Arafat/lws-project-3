@@ -3,7 +3,21 @@ import { ProductsContext } from '../../context';
 import ProductCard from './ProductCard';
 
 export default function Products() {
-  const { products } = useContext(ProductsContext);
+  const { products, setProducts } = useContext(ProductsContext);
+  function handleChange(e) {
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case 'popular':
+        {
+          const mostPopular = [...products].sort((a, b) => b.rating - a.rating);
+          setProducts(mostPopular);
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
   return (
     <>
       <div className="lg:col-span-2">
@@ -11,11 +25,15 @@ export default function Products() {
           <h2 className="text-2xl font-bold">Your Products</h2>
           <div className="flex items-center space-x-2">
             <span className="text-sm">Sort by:</span>
-            <select className="border rounded-md px-2 py-1 text-sm">
-              <option>Most Popular</option>
-              <option>Newest</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
+            <select
+              onChange={handleChange}
+              className="border rounded-md px-2 py-1 text-sm"
+            >
+              <option defaultChecked>select</option>
+              <option value={'popular'}>Most Popular</option>
+              <option value={'newest'}>Newest</option>
+              <option value={'lowToHigh'}>Price: Low to High</option>
+              <option value={'highToLow'}>Price: High to Low</option>
             </select>
           </div>
         </div>
