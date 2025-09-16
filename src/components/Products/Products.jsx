@@ -20,6 +20,13 @@ export default function Products() {
         }
         break;
 
+      case 'highToLow':
+        {
+          const highToLow = [...products].sort((a, b) => b.price - a.price);
+          setProducts(highToLow);
+        }
+        break;
+
       default:
         break;
     }
