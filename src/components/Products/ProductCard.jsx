@@ -21,16 +21,24 @@ export default function ProductCard({ product }) {
 
   function handleRemove() {
     setToggleButton(!toggleButton);
+    // cartItems থেকে ওই item খুঁজে তার quantity বের করো
+    const itemInCart = cartItems.find((item) => item.id === product.id);
+    const itemQuantity = itemInCart ? itemInCart.quantity || 1 : 1;
+
+    // cart থেকে remove
     const filterItems = cartItems.filter((item) => item.id !== product.id);
     setCartItems(filterItems);
 
+    // product stock reset এবং quantity আবার 1 করে দিচ্ছি
     const resetProducts = products.map((p) =>
       p.id === product.id
-        ? { ...p, stock: product.stock + product.quantity, quantity: 1 }
+        ? { ...p, stock: product.stock + itemQuantity, quantity: 1 }
         : p
     );
     setProducts(resetProducts);
-    setSubTotal(subTotal - product.price);
+
+    // subtotal থেকে quantity অনুযায়ী minus
+    setSubTotal(subTotal - product.price * itemQuantity);
   }
 
   return (
